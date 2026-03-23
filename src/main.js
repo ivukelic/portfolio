@@ -1,5 +1,5 @@
 import { createRenderer, loadResources } from "./core";
-import { computerScene, spellbookScene } from "./scenes";
+import { Scenes } from "./scenes";
 
 import "./style.css";
 
@@ -7,7 +7,6 @@ window.addEventListener("load", () => {
     const renderer = createRenderer("#canvas");
 
     const scenes = [];
-    const sceneClasses = { computer: computerScene, spellbook: spellbookScene };
 
     loadResources(
         {
@@ -19,16 +18,16 @@ window.addEventListener("load", () => {
             },
         },
         (resources) => {
-            document.querySelectorAll(".scene").forEach((element) => {
-                const sceneClass = sceneClasses[element.id];
-                if (sceneClass) {
-                    const view = new sceneClass(element);
+            document.querySelectorAll(".scene").forEach((htmlElement) => {
+                console.log(htmlElement);
+                const view = new Scenes[htmlElement.id](htmlElement);
+                console.log(view);
+                if (view) {
                     scenes.push(view);
                 } else {
                     console.log("error");
                 }
             });
-            console.log(scenes);
             scenes.forEach((scene) => scene.onInit(resources));
         },
     );
