@@ -8,6 +8,7 @@ function createRenderer(canvasSelector) {
     });
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // cutting out a piece of canvas to display
     renderer.setScissorTest(true);
 
     return renderer;
@@ -36,6 +37,25 @@ function loadResources(resourcesToLoad, callback) {
     Promise.all(promises)
         .then(() => callback(resources))
         .catch(console.error);
+}
+
+function floatMesh(mesh, time, options = {}) {
+    const {
+        amplitude = 0.15,
+        rotation = 0.08,
+        speed = 1.0,
+        phase = 0,
+    } = options;
+
+    if (mesh.userData._floatBaseY === undefined) {
+        mesh.userData._floatBaseY = mesh.position.y;
+        mesh.userData._floatBaseRotZ = mesh.rotation.z;
+    }
+
+    const t = time * speed + phase;
+    mesh.position.y = mesh.userData._floatBaseY + Math.sin(t) * amplitude;
+    mesh.rotation.z =
+        mesh.userData._floatBaseRotZ + Math.sin(t * 0.8) * rotation;
 }
 
 class SceneElement {
@@ -75,4 +95,4 @@ class SceneElement {
     onTick(time) {}
 }
 
-export { createRenderer, loadResources, SceneElement };
+export { createRenderer, loadResources, floatMesh, SceneElement };

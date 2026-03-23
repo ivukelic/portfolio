@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { SceneElement } from "./core";
+import { SceneElement, floatMesh } from "./core";
 
 class computer extends SceneElement {
     mesh;
@@ -15,6 +15,7 @@ class computer extends SceneElement {
 
     onTick(time) {
         const lerp = THREE.MathUtils.lerp;
+        floatMesh(this.mesh, time, { rotation: 0.1 });
 
         this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
     }
@@ -34,6 +35,11 @@ class spellbook extends SceneElement {
 
     onTick(time) {
         const lerp = THREE.MathUtils.lerp;
+        floatMesh(this.mesh, time, {
+            speed: 1.1,
+            amplitude: 0.2,
+            rotation: 0.3,
+        });
 
         this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
     }
@@ -53,6 +59,7 @@ class cup extends SceneElement {
 
     onTick(time) {
         const lerp = THREE.MathUtils.lerp;
+        floatMesh(this.mesh, time, { phase: 12, speed: 1.25 });
 
         this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
     }
@@ -72,6 +79,7 @@ class quill extends SceneElement {
 
     onTick(time) {
         const lerp = THREE.MathUtils.lerp;
+        floatMesh(this.mesh, time, { phase: 6, rotation: 0.1 });
 
         this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
     }
