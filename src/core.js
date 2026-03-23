@@ -70,6 +70,18 @@ function floatMesh(mesh, time, options = {}) {
         mesh.userData._floatBaseRotZ + Math.sin(t * 0.8) * rotation;
 }
 
+function createBackgroundPlane(width, height, color, y = 0, z = -5) {
+    const plane = new THREE.Mesh(
+        new THREE.PlaneGeometry(width, height),
+        new THREE.MeshBasicMaterial({
+            color,
+        }),
+    );
+
+    plane.position.set(0, y, z);
+    return plane;
+}
+
 class SceneElement {
     constructor(htmlElement) {
         this.scene = new THREE.Scene();
@@ -117,4 +129,10 @@ class SceneElement {
     onTick(time) {}
 }
 
-export { createRenderer, loadResources, floatMesh, SceneElement };
+export {
+    createRenderer,
+    loadResources,
+    floatMesh,
+    createBackgroundPlane,
+    SceneElement,
+};

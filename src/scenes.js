@@ -1,8 +1,9 @@
 import * as THREE from "three";
-import { SceneElement, floatMesh } from "./core";
+import { SceneElement, floatMesh, createBackgroundPlane } from "./core";
 
 class computer extends SceneElement {
     mesh;
+    bgPlane;
 
     onInit({ meshes }) {
         this.mesh = meshes.computer.clone();
@@ -11,8 +12,12 @@ class computer extends SceneElement {
 
         this.frameObject(this.mesh);
 
+        this.bgPlane = createBackgroundPlane(8, 6, 0x336699);
+        this.bgPlane.rotation.y = -0.5;
+
         this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
         this.scene.add(this.mesh);
+        this.scene.add(this.bgPlane);
     }
 
     onTick(time) {
@@ -34,8 +39,12 @@ class spellbook extends SceneElement {
 
         this.frameObject(this.mesh);
 
-        this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
+        this.bgPlane = createBackgroundPlane(8, 6, 0x880000);
+        this.bgPlane.rotation.y = 0.5;
+
+        this.scene.add(new THREE.AmbientLight(0xffffff, 4));
         this.scene.add(this.mesh);
+        this.scene.add(this.bgPlane);
     }
 
     onTick(time) {
@@ -55,14 +64,18 @@ class cup extends SceneElement {
 
     onInit({ meshes }) {
         this.mesh = meshes.cup.clone();
-        this.mesh.scale.setScalar(12);
+        this.mesh.scale.setScalar(13);
         this.mesh.rotation.x += 0.5;
         this.mesh.position.z = -1;
 
         this.frameObject(this.mesh);
 
-        this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
+        this.bgPlane = createBackgroundPlane(8, 6, 0xddee00);
+        this.bgPlane.rotation.y = -0.5;
+
+        this.scene.add(new THREE.AmbientLight(0xffffff, 8));
         this.scene.add(this.mesh);
+        this.scene.add(this.bgPlane);
     }
 
     onTick(time) {
@@ -75,17 +88,22 @@ class cup extends SceneElement {
 
 class quill extends SceneElement {
     mesh;
+    bgPlane;
 
     onInit({ meshes }) {
         this.mesh = meshes.quill.clone();
         this.mesh.rotation.x += 0.4;
         this.mesh.rotation.y += 0.4;
-        this.mesh.scale.setScalar(4);
+        this.mesh.scale.setScalar(5);
 
         this.frameObject(this.mesh);
 
-        this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
+        this.bgPlane = createBackgroundPlane(8, 6, 0x00aadd);
+        this.bgPlane.rotation.y = 0.5;
+
+        this.scene.add(new THREE.AmbientLight(0xffffff, 5));
         this.scene.add(this.mesh);
+        this.scene.add(this.bgPlane);
     }
 
     onTick(time) {
