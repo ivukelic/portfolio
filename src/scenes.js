@@ -9,6 +9,8 @@ class computer extends SceneElement {
         this.mesh.scale.setScalar(6);
         this.mesh.rotation.y = 2;
 
+        this.frameObject(this.mesh);
+
         this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
         this.scene.add(this.mesh);
     }
@@ -26,8 +28,11 @@ class spellbook extends SceneElement {
 
     onInit({ meshes }) {
         this.mesh = meshes.spellbook.clone();
-        this.mesh.scale.setScalar(6);
-        this.mesh.rotation.y = 2;
+        this.mesh.rotation.x += 0.4;
+        this.mesh.rotation.y -= 1.5;
+        this.mesh.scale.setScalar(2);
+
+        this.frameObject(this.mesh);
 
         this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
         this.scene.add(this.mesh);
@@ -50,8 +55,11 @@ class cup extends SceneElement {
 
     onInit({ meshes }) {
         this.mesh = meshes.cup.clone();
-        this.mesh.scale.setScalar(6);
-        this.mesh.rotation.y = 2;
+        this.mesh.scale.setScalar(12);
+        this.mesh.rotation.x += 0.5;
+        this.mesh.position.z = -1;
+
+        this.frameObject(this.mesh);
 
         this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
         this.scene.add(this.mesh);
@@ -70,8 +78,11 @@ class quill extends SceneElement {
 
     onInit({ meshes }) {
         this.mesh = meshes.quill.clone();
-        this.mesh.scale.setScalar(6);
-        this.mesh.rotation.y = 2;
+        this.mesh.rotation.x += 0.4;
+        this.mesh.rotation.y += 0.4;
+        this.mesh.scale.setScalar(4);
+
+        this.frameObject(this.mesh);
 
         this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
         this.scene.add(this.mesh);

@@ -22,17 +22,29 @@ function loadResources(resourcesToLoad, callback) {
     };
 
     const promises = [];
-    const resources = { meshes: {} };
+    const resources = { meshes: {}, fonts: {} };
 
-    const loader = new GLTFLoader();
-    for (const [key, url] of Object.entries(resourcesToLoad.meshes)) {
-        promises.push(
-            loadAsync(loader, url).then((gltf) => {
-                resources.meshes[key] = gltf.scene;
-            }),
-        );
+    if (resourcesToLoad.meshes) {
+        const loader = new GLTFLoader();
+        for (const [key, url] of Object.entries(resourcesToLoad.meshes)) {
+            promises.push(
+                loadAsync(loader, url).then((gltf) => {
+                    resources.meshes[key] = gltf.scene;
+                }),
+            );
+        }
     }
 
+    if (resourcesToLoad.fonts) {
+        const loader = new FontLoader();
+        for (const [key, url] of Object.entries(resourcesToLoad.fonts)) {
+            promises.push(
+                loadAsync(loader, url).then((font) => {
+                    resources.fonts[key] = font;
+                }),
+            );
+        }
+    }
     // Resolve all promises and then notify that resource loading is complete:
     Promise.all(promises)
         .then(() => callback(resources))
@@ -70,6 +82,16 @@ class SceneElement {
     // get position + size on website
     getRect() {
         return this.element.getBoundingClientRect();
+    }
+
+    // centering the 3d object within a scene
+    frameObject(object) {
+        const box = new THREE.Box3().setFromObject(object);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+
+        object.position.sub(center);
+        this.camera.lookAt(0, 0, 0);
     }
 
     onRender(renderer, time) {

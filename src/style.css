@@ -1,13 +1,26 @@
+@font-face {
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/nunito-sans-v19-latin-regular.woff2") format("woff2");
+}
+
 body {
     background-color: #111;
     color: #eee;
     margin: 8px;
+    font-family: "Nunito Sans", sans-serif;
+}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
 section {
     margin: 0 auto;
     max-width: 1024px;
-    max-height: 384px;
+    min-height: 384px;
 }
 
 a {
