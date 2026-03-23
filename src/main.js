@@ -14,8 +14,8 @@ window.addEventListener("load", () => {
                 computer: "models/computer.glb",
             },
         },
-        () => {
-            document.querySelector("scene").forEach((element) => {
+        (resources) => {
+            document.querySelectorAll(".scene").forEach((element) => {
                 const view = new computerScene(element);
                 if (view) {
                     scenes.push(view);
@@ -23,6 +23,8 @@ window.addEventListener("load", () => {
                     console.log("error");
                 }
             });
+            console.log(scenes);
+            scenes.forEach((scene) => scene.onInit(resources));
         },
     );
 

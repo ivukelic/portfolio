@@ -19,6 +19,8 @@ class computerScene {
             return;
         }
 
+        this.onTick(time);
+
         const posY = window.innerHeight - bottom;
 
         renderer.setViewport(left, posY, width, height);
@@ -28,6 +30,21 @@ class computerScene {
         this.camera.updateProjectionMatrix();
 
         renderer.render(this.scene, this.camera);
+    }
+
+    onInit({ meshes }) {
+        this.mesh = meshes.computer.clone();
+        this.mesh.scale.setScalar(6);
+        this.mesh.rotation.y = 2;
+
+        this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
+        this.scene.add(this.mesh);
+    }
+
+    onTick(time) {
+        const lerp = THREE.MathUtils.lerp;
+
+        this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
     }
 }
 
