@@ -1,5 +1,8 @@
 import * as THREE from "three";
+
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 function createRenderer(canvasSelector) {
     const renderer = new THREE.WebGLRenderer({
@@ -129,10 +132,69 @@ class SceneElement {
     onTick(time) {}
 }
 
+class TextGroup {
+    constructor({
+        text,
+        size,
+        font,
+        spaceWidth = size,
+        depth = size / 4,
+        material,
+    }) {
+        this.group = new THREE.Group();
+        this.letters = [];
+        this.baseOffsets = [];
+        this.totalWidth = 0;
+        this.squish = 0;
+
+        let offsetX = 0;
+
+        for (const char of text) {
+            if (char !== " ") {
+                const charGeometry = new TextGeometry(char, {
+                    font: font,
+                    size: size,
+                    depth: depth,
+                    curveSegments: 4,
+                });
+
+                charGeometry.computeBoundingBox();
+
+                const charWidth =
+                    charGeometry.boundingBox.max.x -
+                    charGeometry.boundingBox.min.x;
+
+                const charMesh = new THREE.Mesh(charGeometry, material);
+
+                this.baseOffsets.push(offsetX);
+                charMesh.position.x = offsetX;
+
+                offsetX += charWidth;
+
+                this.group.add(charMesh);
+                this.letters.push(charMesh);
+            } else {
+                offsetX += spaceWidth;
+            }
+        }
+
+        this.totalWidth = offsetX;
+
+        for (const letter of this.letters) {
+            letter.position.x -= offsetX / 2;
+        }
+    }
+
+    [Symbol.iterator]() {
+        return this.letters[Symbol.iterator]();
+    }
+}
+
 export {
     createRenderer,
     loadResources,
     floatMesh,
     createBackgroundPlane,
     SceneElement,
+    TextGroup,
 };

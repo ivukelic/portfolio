@@ -1,5 +1,10 @@
 import * as THREE from "three";
-import { SceneElement, floatMesh, createBackgroundPlane } from "./core";
+import {
+    SceneElement,
+    floatMesh,
+    createBackgroundPlane,
+    TextGroup,
+} from "./core";
 
 class computer extends SceneElement {
     mesh;
@@ -114,6 +119,39 @@ class quill extends SceneElement {
     }
 }
 
+class welcome extends SceneElement {
+    text;
+
+    onInit({ fonts }) {
+        this.text = new TextGroup({
+            text: "WELCOME",
+            font: fonts.primary,
+            material: new THREE.MeshToonMaterial(),
+            size: 4,
+            depth: 2,
+        });
+        this.text.group.scale.y = 1.5;
+
+        this.camera.position.set(0, 4, this.text.group.position.z + 20);
+        this.frameObject(this.text.group);
+
+        const light = new THREE.DirectionalLight(0xff0000, 5);
+        light.position.set(0, 4, this.camera.position.z - 10);
+
+        this.scene.add(light);
+        this.scene.add(this.text.group);
+        this.scene.fog = new THREE.Fog(0x0000ff, 0.5, 40);
+    }
+
+    onTick(time) {
+        const floatOptions = { phase: 0, amplitude: 0.3 };
+        for (const letter of this.text) {
+            floatMesh(letter, time, floatOptions);
+            floatOptions.phase += 1;
+        }
+    }
+}
+
 // Defined here to easily map to HTML elements, avoids minification in production:
-const Scenes = { computer, spellbook, cup, quill };
+const Scenes = { computer, spellbook, cup, quill, welcome };
 export { Scenes };

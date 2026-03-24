@@ -16,12 +16,13 @@ window.addEventListener("load", () => {
                 spellbook: "models/spellbook.glb",
                 quill: "models/quill.glb",
             },
+            fonts: {
+                primary: "fonts/DynaPuff-SemiBold.json",
+            },
         },
         (resources) => {
             document.querySelectorAll(".scene").forEach((htmlElement) => {
-                console.log(htmlElement);
                 const view = new Scenes[htmlElement.id](htmlElement);
-                console.log(view);
                 if (view) {
                     scenes.push(view);
                 } else {
