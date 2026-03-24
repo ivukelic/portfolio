@@ -1,5 +1,6 @@
 import { createRenderer, loadResources } from "./core";
 import { Scenes } from "./scenes";
+import { inject } from "@vercel/analytics";
 
 import "./style.css";
 
@@ -44,3 +45,6 @@ window.addEventListener("load", () => {
 
     requestAnimationFrame(tick);
 });
+
+// Vercel
+inject();
