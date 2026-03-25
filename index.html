@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Frontend developer portfolio" />
   <title>Iva's portfolio</title>
 </head>
 
@@ -12,7 +13,7 @@
   <canvas id="canvas"></canvas>
   <script type="module" src="/src/main.js"></script>
 
-  <header>
+  <header role="banner">
     <div class="scene" style="height: 300px; margin-top: 50px" id="welcome"></div>
   </header>
 
@@ -27,7 +28,8 @@
         </p>
         <p>
           This is version 2 of my portfolio website.
-          You can check the older version <a href="https://babfolio.vercel.app/">here</a> if you're interested.
+          You can check the older version <a href="https://babfolio.vercel.app/" target="_blank"
+            rel="noopener noreferrer">here</a> if you're interested.
         </p>
       </section>
       <div class="scene" id="computer"></div>
@@ -50,7 +52,6 @@
         <p>I speak English, German, Croatian(native) & a bit of Japanese.</p>
       </section>
       <div class="scene" id="spellbook"></div>
-
     </div>
 
 
@@ -65,11 +66,11 @@
           I've developed a small Japanese vocabulary app to help myself learn
           Japanese!
         </p>
-        <a href="https://nihongo-vocab-trainer-vanilla.vercel.app/">Check it out!</a>
-
+        <a class="btn" href="https://nihongo-vocab-trainer-vanilla.vercel.app/" target="_blank"
+          rel="noopener noreferrer">Check it
+          out!</a>
       </section>
       <div class="scene" id="cup"></div>
-
     </div>
 
 
@@ -81,16 +82,20 @@
           on GitHub and I check my e-mail regularly!
         </p>
         <p>
-          <a class="btn btn-img" href="https://github.com/ivukelic">
+          <a class="btn btn-img" href="https://github.com/ivukelic" alt="GitHub profile" target="_blank"
+            rel="noopener noreferrer">
             <img src="icons/github.svg" width="32" height="32" alt="GitHub"></img>
           </a>
-          <a class="btn btn-img" href="https://www.linkedin.com/in/iva-vukelic-5985ba152/">
+          <a class="btn btn-img" href="https://www.linkedin.com/in/iva-vukelic-5985ba152/" alt="LinkedIn profile"
+            target="_blank" rel="noopener noreferrer">
             <img src="icons/linkedin.svg" width="32" height="32" alt="LinkedIn"></img>
           </a>
-          <a class="btn btn-img" href="mailto:ivavukelic.gm@gmail.com">
+          <a class="btn btn-img" href="mailto:ivavukelic.gm@gmail.com" alt="Contact e-mail" target="_blank"
+            rel="noopener noreferrer">
             <img src="icons/email.svg" width="32" height="32" alt="E-mail"></img>
           </a>
-          <a class="btn btn-img" href="files/Iva_Vukelic-Resume.pdf">
+          <a class="btn btn-img" href="files/Iva_Vukelic-Resume.pdf" alt="CV download" target="_blank"
+            rel="noopener noreferrer">
             <img src="icons/cv.svg" width="32" height="32" alt="CV"></img>
           </a>
         </p>
