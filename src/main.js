@@ -1,4 +1,4 @@
-import { createRenderer, loadResources } from "./core";
+import { createRenderer, loadResources, cursor } from "./core";
 import { Scenes } from "./scenes";
 import { inject } from "@vercel/analytics";
 
@@ -6,6 +6,7 @@ import "./style.css";
 
 window.addEventListener("load", () => {
     const renderer = createRenderer("#canvas");
+    cursor.initialize();
 
     const scenes = [];
 

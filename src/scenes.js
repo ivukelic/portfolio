@@ -4,6 +4,7 @@ import {
     floatMesh,
     createBackgroundPlane,
     TextGroup,
+    cursor,
 } from "./core";
 
 class computer extends SceneElement {
@@ -144,10 +145,26 @@ class welcome extends SceneElement {
     }
 
     onTick(time) {
+        const lerp = THREE.MathUtils.lerp;
+
         const floatOptions = { phase: 0, amplitude: 0.3 };
         for (const letter of this.text) {
             floatMesh(letter, time, floatOptions);
             floatOptions.phase += 1;
+
+            const ssPos = this.getScreenspaceOf(letter);
+            const ssDistance = cursor.getDistance(ssPos.x + 20, ssPos.y + 40);
+            if (ssDistance.x < 80 && ssDistance.y < 80) {
+                letter.position.z = lerp(letter.position.z, 1.5, 0.05);
+            } else {
+                letter.position.z = lerp(letter.position.z, 0, 0.08);
+            }
+        }
+
+        if (this.getRect().width < 800) {
+            this.text.setSquish(0.2);
+        } else {
+            this.text.setSquish(0);
         }
     }
 }

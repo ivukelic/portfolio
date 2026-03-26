@@ -109,6 +109,19 @@ class SceneElement {
         this.camera.lookAt(0, 0, 0);
     }
 
+    // for hover effect
+    getScreenspaceOf(object) {
+        const worldPosition = new THREE.Vector3();
+        object.getWorldPosition(worldPosition);
+        worldPosition.project(this.camera);
+
+        const { width, height } = this.getRect();
+        return {
+            x: (worldPosition.x * 0.5 + 0.5) * width,
+            y: (-worldPosition.y * 0.5, 0.5) * height,
+        };
+    }
+
     onRender(renderer, time) {
         const { top, bottom, left, width, height } = this.getRect();
         if (bottom < 0 || top > window.innerHeight) {
@@ -185,10 +198,44 @@ class TextGroup {
         }
     }
 
+    setSquish(amount) {
+        if (this.squish == amount) return;
+
+        const xScale = 1 - amount;
+        const yScale = 1 + amount;
+        this.squish = amount;
+
+        const scaledWidth = this.totalWidth * xScale;
+        let index = 0;
+        for (const letter of this.letters) {
+            letter.scale.x = xScale;
+            letter.scale.y = yScale;
+            letter.position.x =
+                this.baseOffsets[index] * xScale - scaledWidth / 2;
+            ++index;
+        }
+    }
+
     [Symbol.iterator]() {
         return this.letters[Symbol.iterator]();
     }
 }
+
+const cursor = {
+    x: 0,
+    y: 0,
+
+    initialize() {
+        window.addEventListener("mousemove", (event) => {
+            cursor.x = event.clientX;
+            cursor.y = event.clientY;
+        });
+    },
+
+    getDistance(px, py) {
+        return { x: Math.abs(px - cursor.x), y: Math.abs(py - cursor.y) };
+    },
+};
 
 export {
     createRenderer,
@@ -197,4 +244,5 @@ export {
     createBackgroundPlane,
     SceneElement,
     TextGroup,
+    cursor,
 };
