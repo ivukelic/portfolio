@@ -30,7 +30,16 @@ class computer extends SceneElement {
         const lerp = THREE.MathUtils.lerp;
         floatMesh(this.mesh, time, { rotation: 0.1 });
 
-        this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
+        const viewProgress = this.getViewProgress();
+        if (viewProgress > 0.3 && viewProgress < 0.7) {
+            this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 1, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 1, 0.025);
+        } else {
+            this.mesh.position.z = lerp(this.mesh.position.z, -2, 0.05);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 0.5, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 0.5, 0.025);
+        }
     }
 }
 
@@ -61,7 +70,16 @@ class spellbook extends SceneElement {
             rotation: 0.3,
         });
 
-        this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
+        const viewProgress = this.getViewProgress();
+        if (viewProgress > 0.2 && viewProgress < 0.8) {
+            this.mesh.position.z = lerp(this.mesh.position.z, 0, 0.025);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 1, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 1, 0.025);
+        } else {
+            this.mesh.position.z = lerp(this.mesh.position.z, -1, 0.05);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 0.5, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 0.5, 0.025);
+        }
     }
 }
 
@@ -88,7 +106,16 @@ class cup extends SceneElement {
         const lerp = THREE.MathUtils.lerp;
         floatMesh(this.mesh, time, { phase: 12, speed: 1.25 });
 
-        this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
+        const viewProgress = this.getViewProgress();
+        if (viewProgress > 0.2 && viewProgress < 0.8) {
+            this.mesh.position.z = lerp(this.mesh.position.z, 0, 0.025);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 1, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 1, 0.025);
+        } else {
+            this.mesh.position.z = lerp(this.mesh.position.z, -1, 0.05);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 0.5, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 0.5, 0.025);
+        }
     }
 }
 
@@ -116,7 +143,16 @@ class quill extends SceneElement {
         const lerp = THREE.MathUtils.lerp;
         floatMesh(this.mesh, time, { phase: 6, rotation: 0.1 });
 
-        this.mesh.position.z = lerp(this.mesh.position.z, -0.5, 0.025);
+        const viewProgress = this.getViewProgress();
+        if (viewProgress > 0.2 && viewProgress < 0.8) {
+            this.mesh.position.z = lerp(this.mesh.position.z, 0, 0.025);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 1, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 1, 0.025);
+        } else {
+            this.mesh.position.z = lerp(this.mesh.position.z, -1, 0.05);
+            this.bgPlane.scale.y = lerp(this.bgPlane.scale.y, 0.5, 0.025);
+            this.bgPlane.scale.x = lerp(this.bgPlane.scale.x, 0.5, 0.025);
+        }
     }
 }
 

@@ -109,7 +109,7 @@ class SceneElement {
         this.camera.lookAt(0, 0, 0);
     }
 
-    // for hover effect
+    // for hover effect on the banner letters
     getScreenspaceOf(object) {
         const worldPosition = new THREE.Vector3();
         object.getWorldPosition(worldPosition);
@@ -120,6 +120,16 @@ class SceneElement {
             x: (worldPosition.x * 0.5 + 0.5) * width,
             y: (-worldPosition.y * 0.5, 0.5) * height,
         };
+    }
+
+    // for the scrolling effect
+    getViewProgress() {
+        const { top, height } = this.getRect();
+        const viewport = window.innerHeight;
+
+        let progress = (viewport - top) / (viewport + height);
+
+        return THREE.MathUtils.clamp(progress, 0, 1);
     }
 
     onRender(renderer, time) {
