@@ -6,6 +6,7 @@ import {
     TextGroup,
     cursor,
 } from "./core";
+import gsap from "gsap";
 
 class computer extends SceneElement {
     mesh;
@@ -24,6 +25,14 @@ class computer extends SceneElement {
         this.scene.add(new THREE.AmbientLight(0xdddddd, 3));
         this.scene.add(this.mesh);
         this.scene.add(this.bgPlane);
+    }
+
+    onClick(event) {
+        gsap.to(this.mesh.rotation, {
+            duration: 1.5,
+            ease: "power2.inOut",
+            y: this.mesh.rotation.y + Math.PI * 2,
+        });
     }
 
     onTick(time) {
@@ -60,6 +69,14 @@ class spellbook extends SceneElement {
         this.scene.add(new THREE.AmbientLight(0xffffff, 4));
         this.scene.add(this.mesh);
         this.scene.add(this.bgPlane);
+    }
+
+    onClick(event) {
+        gsap.to(this.mesh.rotation, {
+            duration: 1.5,
+            ease: "power2.inOut",
+            x: this.mesh.rotation.x + Math.PI * 2,
+        });
     }
 
     onTick(time) {
@@ -102,6 +119,15 @@ class cup extends SceneElement {
         this.scene.add(this.bgPlane);
     }
 
+    onClick(event) {
+        gsap.to(this.mesh.rotation, {
+            duration: 1.5,
+            ease: "power2.inOut",
+            x: this.mesh.rotation.x + Math.PI * 2,
+            y: this.mesh.rotation.y + Math.PI * 2,
+        });
+    }
+
     onTick(time) {
         const lerp = THREE.MathUtils.lerp;
         floatMesh(this.mesh, time, { phase: 12, speed: 1.25 });
@@ -137,6 +163,14 @@ class quill extends SceneElement {
         this.scene.add(new THREE.AmbientLight(0xffffff, 5));
         this.scene.add(this.mesh);
         this.scene.add(this.bgPlane);
+    }
+
+    onClick(event) {
+        gsap.to(this.mesh.rotation, {
+            duration: 1.5,
+            ease: "power2.inOut",
+            y: this.mesh.rotation.y + Math.PI * 2,
+        });
     }
 
     onTick(time) {

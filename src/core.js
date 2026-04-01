@@ -92,6 +92,9 @@ class SceneElement {
         this.camera.position.z = 5;
         this.camera.lookAt(0, 0, 0);
         this.element = htmlElement;
+        this.element.addEventListener("click", (event) => {
+            this.onClick(event);
+        });
     }
 
     // get position + size on website
@@ -153,6 +156,7 @@ class SceneElement {
     // Functions for subclasses to implement:
     onInit(resources) {}
     onTick(time) {}
+    onClick(event) {}
 }
 
 class TextGroup {
